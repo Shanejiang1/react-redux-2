@@ -3,11 +3,27 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import {createStore} from 'redux';
+import {Provider} from "react-redux";
+
+const reducer = (state, action)=>{
+  if(state === undefined){
+    return {n:0}
+  }else{
+    if(action.type === 'add'){
+      var newState = {n: state.n + action.payload}
+      return newState
+    }else{
+      return state
+    }
+  }
+}
+const store = createStore(reducer)
 
 ReactDOM.render(
-  <React.StrictMode>
+  <Provider store={store}>
     <App />
-  </React.StrictMode>,
+  </Provider>,
   document.getElementById('root')
 );
 
